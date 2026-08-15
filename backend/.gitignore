@@ -14,8 +14,7 @@ npm-debug.log*
 # OS
 .DS_Store
 
-# drizzle
-/drizzle/meta
+# drizzle — do NOT ignore /drizzle/meta (migrations need it)
 
 # uploaded receipt/photo attachments — user data, not source
 /uploads/*

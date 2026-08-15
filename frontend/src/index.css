@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+/* Tailwind v4 class-based dark mode: toggling a `.dark` class on <html>
+   (see lib/theme.ts) activates every `dark:` utility, instead of the
+   default (and here, undesired) automatic prefers-color-scheme behavior. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Calm, professional design tokens — a personal financial control center,
+   not a colorful budgeting template (spec §36). Palette follows the
+   dataviz skill's validated default (references/palette.md). */
+:root {
+  color-scheme: light;
+  --surface-1: #fcfcfb;
+  --page: #f4f4f2;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --muted: #898781;
+  --border: #e1e0d9;
+  --border-strong: #c3c2b7;
+
+  --brand: #2a78d6; /* categorical slot 1 (blue) */
+  --brand-dark: #184f95;
+
+  --good: #0ca30c;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+}
+
+/* Dark mode — same semantic tokens, dark values. Applied via a `dark` class
+   on <html>, toggled from Layout (see lib/theme.ts) and persisted locally. */
+:root.dark {
+  color-scheme: dark;
+  --surface-1: #1c1c1a;
+  --page: #131312;
+  --text-primary: #f2f2ef;
+  --text-secondary: #b8b6ae;
+  --muted: #8a887f;
+  --border: #33322d;
+  --border-strong: #47453d;
+
+  --brand: #4d96e8;
+  --brand-dark: #2a78d6;
+
+  --good: #35c235;
+  --warning: #fcc94a;
+  --serious: #f0996f;
+  --critical: #e3625f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--page);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

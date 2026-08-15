@@ -1,0 +1,23 @@
+# compiled output
+/dist
+/node_modules
+
+# env
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+
+# drizzle
+/drizzle/meta
+
+# uploaded receipt/photo attachments — user data, not source
+/uploads/*
+!/uploads/.gitkeep
+!/uploads/receipts/.gitkeep

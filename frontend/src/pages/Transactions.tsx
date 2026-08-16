@@ -47,6 +47,11 @@ export function Transactions() {
     onSuccess: () => { invalidate(); setTransfer({ ...transfer, fromAmount: '', description: '' }); },
   });
 
+  const deleteTxn = useMutation({
+    mutationFn: (id: string) => api.del(`/transactions/${id}`),
+    onSuccess: () => invalidate(),
+  });
+
   const uploadReceipt = useMutation({
     mutationFn: async ({ id, file }: { id: string; file: File }) => {
       const form = new FormData();
@@ -168,7 +173,7 @@ export function Transactions() {
         </Card>
 
         <Card title="Recent transactions" className="lg:col-span-2">
-          <Table headers={['Date', 'Type', 'Description', 'Amount', 'Receipt']}>
+          <Table headers={['Date', 'Type', 'Description', 'Amount', 'Receipt', '']}>
             {txns?.slice(0, 30).map((t) => (
               <tr key={t.id}>
                 <td className="py-2 pr-4 whitespace-nowrap text-[var(--text-secondary)]">{fmtDate(t.date)}</td>
@@ -210,6 +215,20 @@ export function Transactions() {
                       + Attach
                     </button>
                   )}
+                </td>
+                <td className="py-2 pr-4 text-right">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (window.confirm(t.type === 'TRANSFER' ? 'Delete this transfer? Both legs (from and to account) will be removed.' : 'Delete this transaction? This cannot be undone.')) {
+                        deleteTxn.mutate(t.id);
+                      }
+                    }}
+                    className="text-xs font-medium text-[var(--muted)] hover:text-[var(--critical)]"
+                    disabled={deleteTxn.isPending}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}

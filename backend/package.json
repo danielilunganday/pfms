@@ -22,7 +22,8 @@
     "encrypt-existing-pii": "ts-node -r tsconfig-paths/register src/scripts/encrypt-existing-pii.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-   "migrate:deploy": "ts-node -r tsconfig-paths/register src/scripts/run-migrate.ts"
+   "migrate:deploy": "node dist/src/scripts/run-migrate.js",
+   "seed:deploy": "node dist/src/seed/seed.js"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
